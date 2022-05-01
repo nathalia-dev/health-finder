@@ -1,0 +1,18 @@
+.suggestion{
+    text-align: center;
+    cursor:pointer;
+    width: 150px;
+    }
+
+    .suggestion:hover{
+    background-color: #e8f4f7;
+    }
+
+    .suggestion-display {
+        margin: auto;
+        width: 150px;
+        border-top: 0.5px solid #bab7b7;
+        border-bottom: 0.5px solid #bab7b7;
+        border-right: 1px solid #bab7b7;
+        border-left: 1px solid #bab7b7;
+    }
