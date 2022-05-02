@@ -2,16 +2,11 @@ import React, {useState} from 'react'
 import { RelatedItem } from '../types';
 
 const HealthTopicRelatedItem: React.FC <RelatedItem> = ({title, url}) => {
-    const [expand, setExpand] = useState(false)
-
-    const handleOnClick = () => {
-        setExpand(!expand)
-    }
 
     return (
-        <div>
-             <h3>{title}</h3>
-            <a href={url}>Read More</a>
+        <div className="col-sm-4 mt-3">
+             <p className="align-top font-weight-bold small">{title}</p>
+             <a href={url} className="badge badge-ligth align-bottom">Read More</a>
         </div>
     )
 }

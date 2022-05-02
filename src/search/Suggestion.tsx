@@ -10,7 +10,6 @@ interface SuggestionProps {
 const Suggestion: React.FC <SuggestionProps> = ({matchedSuggestion, setMatchedSuggestions, setKeyword}) => {
 
     const handleOnClick = (suggestion:string) => {
-        console.log("suggestion",suggestion)
         setKeyword(suggestion)
         setMatchedSuggestions([])
     }

@@ -52,7 +52,6 @@ const Search: React.FC<SearchProps> = ({ setHealthTopics, setError, setIsLoading
 	const fetchDataForSuggestions = async () => {
 		try {
 			setIsLoadingAllAvailableSuggestions(true);
-			//requisitar com default.
 			const res = await axios.get(`${baseUrl}${endpointSearchSuggestions}`);
 			if (res.status !== 200) {
 				setIsLoadingAllAvailableSuggestions(false);
@@ -104,7 +103,7 @@ const Search: React.FC<SearchProps> = ({ setHealthTopics, setError, setIsLoading
 
 	return (
 		<div>
-			<form className="form-inline justify-content-center" onSubmit={handleSubmit}>
+			<form className="form-inline justify-content-center" style={{height: "50px"}}onSubmit={handleSubmit}>
 				<input
 					type="text"
 					name="keyword"
@@ -120,15 +119,19 @@ const Search: React.FC<SearchProps> = ({ setHealthTopics, setError, setIsLoading
 					{...disableInputWhileLoading()}
 				/>
 				<button className="btn btn-primary m-3">
-					<i className="fas fa-search"></i>
+					SEARCH <i className="fas fa-search"></i>
 				</button>
 			</form>
 
 			{matchedSuggestions.length > 0 &&
 				matchedSuggestions.map((suggestion) => (
-					<div className="suggestion-display">
+					<div className="form-inline justify-content-center">
+						<div className="form-control suggestion-display w-50">
 						<Suggestion key={suggestion} matchedSuggestion={suggestion} setMatchedSuggestions={setMatchedSuggestions} setKeyword={setKeyword} />
 					</div>
+
+					</div>
+
 				))}
 		</div>
 	);
