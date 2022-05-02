@@ -1,18 +1,18 @@
 import React, {useState} from 'react'
 import Search from './search/Search';
-import HealthTopicsList from './healthTopics/HealthTopicsList'
+import HealthTopicsList from './health-topics/HealthTopicsList'
 import { HealthTopic } from "./types"
 
 const Home: React.FC = () => {
 
     const [healthTopics, setHealthTopics] = useState<HealthTopic[]>([])
     const [error, setError] = useState<any>([])
-    const [isLoading, setIsLoading] = useState<Boolean>(false)
+    const [isLoadingHealthTopics, setIsLoadingHealthTopics] = useState<Boolean>(false)
     
     return (
         <div>
-            <Search setHealthTopics={setHealthTopics} setError={setError} setIsLoading={setIsLoading} isLoading={isLoading} />
-            {isLoading && <div className="loading"><img src="https://tenor.com/view/loading-gif-9212724.gif"></img></div>}
+            <Search setHealthTopics={setHealthTopics} setError={setError} setIsLoadingHealthTopics={setIsLoadingHealthTopics} />
+            {isLoadingHealthTopics && <div className="loading"><img src="https://tenor.com/view/loading-gif-9212724.gif" alt="isLoadingGif"></img></div>}
             {healthTopics.length > 0? <HealthTopicsList healthTopics={healthTopics}/> : null}
         </div>
     )

@@ -9,14 +9,14 @@ import "./search.css";
 interface SearchProps {
 	setHealthTopics: React.Dispatch<any>;
 	setError: React.Dispatch<any>;
-	setIsLoading: React.Dispatch<Boolean>;
-	isLoading: Boolean;
+	setIsLoadingHealthTopics: React.Dispatch<Boolean>;
 }
 
-const Search: React.FC<SearchProps> = ({ setHealthTopics, setError, setIsLoading, isLoading }) => {
+const Search: React.FC<SearchProps> = ({ setHealthTopics, setError, setIsLoadingHealthTopics }) => {
 	const [keyword, setKeyword] = useState("");
 	const [matchedSuggestions, setMatchedSuggestions] = useState<string[]>([]);
 	const [allAvailableSuggestions, setAllAvailableSuggestions] = useState<string[]>([]);
+    const [isLoadingAllAvailableSuggestions, setIsLoadingAllAvailableSuggestions] = useState<boolean>(false)
 
 	const baseUrl = "https://health.gov/myhealthfinder/api/v3/";
 	const endpointSearchHealthTopics = "topicsearch.json?keyword=";
@@ -24,49 +24,49 @@ const Search: React.FC<SearchProps> = ({ setHealthTopics, setError, setIsLoading
 
 	const fetchDataForHealthTopics = async () => {
 		try {
-			setIsLoading(true);
+			setIsLoadingHealthTopics(true);
 			//vulnerabilidades.
 			const res = await axios.get(`${baseUrl}${endpointSearchHealthTopics}${searchQueryFormat(keyword)}`);
 			//checking the response status code.
 			if (res.status !== 200) {
 				setError([{ status: res.status, message: "Something went wrong, please try again later" }]);
-				setIsLoading(false);
+				setIsLoadingHealthTopics(false);
 			}
 			//checking if the response found any topics.
 			if (res.data.Result.Total === 0) {
 				//If not, return an empty array.
 				setHealthTopics([]);
-				setIsLoading(false);
+				setIsLoadingHealthTopics(false);
 			} else {
 				const formatedData = formatApiData(res.data.Result.Resources.Resource);
 				setHealthTopics(formatedData);
-				setIsLoading(false);
+				setIsLoadingHealthTopics(false);
 			}
 		} catch (error) {
 			setError(error);
-			setIsLoading(false);
+			setIsLoadingHealthTopics(false);
 		}
 	};
 
 	//Add the isLoading state here to avoid delay on autosearch suggestions , if the user type too fast.
 	const fetchDataForSuggestions = async () => {
 		try {
-			setIsLoading(true);
+			setIsLoadingAllAvailableSuggestions(true);
 			//requisitar com default.
 			const res = await axios.get(`${baseUrl}${endpointSearchSuggestions}`);
 			if (res.status !== 200) {
-				setIsLoading(false);
+				setIsLoadingAllAvailableSuggestions(false);
 			}
 			if (res.data.Result.Total === 0) {
-				setIsLoading(false);
+				setIsLoadingAllAvailableSuggestions(false);
 			} else {
 				const formatedData = formatApiDataForSuggestions(res.data.Result.Items.Item);
 				setAllAvailableSuggestions(formatedData);
-				setIsLoading(false);
+				setIsLoadingAllAvailableSuggestions(false);
 			}
 		} catch (e) {
 			setAllAvailableSuggestions([]);
-			setIsLoading(false);
+			setIsLoadingAllAvailableSuggestions(false);
 		}
 	};
 
@@ -92,7 +92,7 @@ const Search: React.FC<SearchProps> = ({ setHealthTopics, setError, setIsLoading
 	};
 
 	const disableInputWhileLoading = () => {
-		if (isLoading) {
+		if (isLoadingAllAvailableSuggestions) {
 			const props = { disabled: true };
 			return props;
 		}

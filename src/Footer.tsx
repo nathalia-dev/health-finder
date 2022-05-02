@@ -3,8 +3,7 @@ import React from 'react'
 const Footer: React.FC = () => {
 
     return (
-        <div>
-            <hr/>
+        <div className="app-footer">
             <p> footer </p>
         </div>
     )
