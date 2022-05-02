@@ -1,118 +1,135 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import formatApiData from "../helpers/formatApiData";
-import formatApiDataForAutoComplete from "../helpers/formatApiDataForAutoComplete";
-import searchQueryFormat from '../helpers/searchQueryFormat'
-import axios from "axios"
-import Suggestion from "./Suggestion"
-import './search.css'
+import formatApiDataForSuggestions from "../helpers/formatApiDataForSuggestions";
+import searchQueryFormat from "../helpers/searchQueryFormat";
+import axios from "axios";
+import Suggestion from "./Suggestion";
+import "./search.css";
 
 interface SearchProps {
-    setHealthTopics: React.Dispatch<any>
-    setError: React.Dispatch<any>
-    setIsLoading: React.Dispatch<Boolean>
-
+	setHealthTopics: React.Dispatch<any>;
+	setError: React.Dispatch<any>;
+	setIsLoading: React.Dispatch<Boolean>;
+	isLoading: Boolean;
 }
 
-const Search: React.FC <SearchProps> = ({setHealthTopics, setError, setIsLoading}) => {
-    const [keyword, setKeyword] = useState('')
-    const [suggestions, setSuggestions] = useState<string[]>([])
-    const [apiTopics, setApiTopics] = useState<string[]>([])
+const Search: React.FC<SearchProps> = ({ setHealthTopics, setError, setIsLoading, isLoading }) => {
+	const [keyword, setKeyword] = useState("");
+	const [matchedSuggestions, setMatchedSuggestions] = useState<string[]>([]);
+	const [allAvailableSuggestions, setAllAvailableSuggestions] = useState<string[]>([]);
 
-    const baseUrl = 'https://health.gov/myhealthfinder/api/v3/'
-    const endpointSearchByKeyword = 'topicsearch.json?keyword='
-    const endpointSearchByTopic = 'itemlist.json?type=topic'
+	const baseUrl = "https://health.gov/myhealthfinder/api/v3/";
+	const endpointSearchHealthTopics = "topicsearch.json?keyword=";
+	const endpointSearchSuggestions = "itemlist.json";
 
-    const fetchDataForSearchResults = async () => {
-        try{
-            //vulnerabilidades.
-            const res = await axios.get(`${baseUrl}${endpointSearchByKeyword}${searchQueryFormat(keyword)}`)
-            //checking the response status code.
-            if (res.status !== 200) {
-                setError([{status: res.status, message: "Something went wrong, please try again later"}])
-                setIsLoading(false)
-            }
-            //checking if the response found any topics. 
-            if (res.data.Result.Total === 0) {
-                //If not, return an empty array.
-                setHealthTopics([])
-                setIsLoading(false)
-            } else {
-                const formatedData = formatApiData(res.data.Result.Resources.Resource)
-                setHealthTopics(formatedData)
-                setIsLoading(false)
-            }
+	const fetchDataForHealthTopics = async () => {
+		try {
+			setIsLoading(true);
+			//vulnerabilidades.
+			const res = await axios.get(`${baseUrl}${endpointSearchHealthTopics}${searchQueryFormat(keyword)}`);
+			//checking the response status code.
+			if (res.status !== 200) {
+				setError([{ status: res.status, message: "Something went wrong, please try again later" }]);
+				setIsLoading(false);
+			}
+			//checking if the response found any topics.
+			if (res.data.Result.Total === 0) {
+				//If not, return an empty array.
+				setHealthTopics([]);
+				setIsLoading(false);
+			} else {
+				const formatedData = formatApiData(res.data.Result.Resources.Resource);
+				setHealthTopics(formatedData);
+				setIsLoading(false);
+			}
+		} catch (error) {
+			setError(error);
+			setIsLoading(false);
+		}
+	};
 
+	//Add the isLoading state here to avoid delay on autosearch suggestions , if the user type too fast.
+	const fetchDataForSuggestions = async () => {
+		try {
+			setIsLoading(true);
+			//requisitar com default.
+			const res = await axios.get(`${baseUrl}${endpointSearchSuggestions}`);
+			if (res.status !== 200) {
+				setIsLoading(false);
+			}
+			if (res.data.Result.Total === 0) {
+				setIsLoading(false);
+			} else {
+				const formatedData = formatApiDataForSuggestions(res.data.Result.Items.Item);
+				setAllAvailableSuggestions(formatedData);
+				setIsLoading(false);
+			}
+		} catch (e) {
+			setAllAvailableSuggestions([]);
+			setIsLoading(false);
+		}
+	};
 
-        } catch (error) {
-            setError(error)
-            setIsLoading(false)
-        }
-    }
+	const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+		const { value } = event.target;
+		setKeyword(value);
+		let matches: string[] = [];
 
-    //qual sentido de ir coloando setApiTopics([]) se ele ja é um empty array. 
-    const fetchDataForAutoComplete = async () => {
-        try {
-            const res = await axios.get(`${baseUrl}${endpointSearchByTopic}`)
-            if (res.status !== 200) {
-                setApiTopics([])
-            }
-            if (res.data.Result.Total === 0) {
-                setApiTopics([])
-            } else {
-                const formatedData = formatApiDataForAutoComplete(res.data.Result.Items.Item)
-                setApiTopics(formatedData)
-            }
-        } catch (e) {
-            setApiTopics([])
-        }
-       
-    }
+		if (value.length > 0) {
+			matches = allAvailableSuggestions.filter((topic) => {
+				const regex = new RegExp(`${value}`, "gi");
+				return topic.match(regex);
+			});
+		}
+		setMatchedSuggestions(matches);
+	};
 
-    const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        const {value} = event.target;
-        setKeyword(value)
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		fetchDataForHealthTopics();
+		setKeyword("");
+		setMatchedSuggestions([]);
+	};
 
-        let matches:string[] = []
+	const disableInputWhileLoading = () => {
+		if (isLoading) {
+			const props = { disabled: true };
+			return props;
+		}
+	};
 
-        if (value.length > 0) {
-            matches = apiTopics.filter((topic) => { 
-                const regex = new RegExp(`${value}`, "gi")
-                return topic.match(regex)
-            })
-        }
-        setSuggestions(matches)
-
-    }
-    console.log(keyword)
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-        fetchDataForSearchResults()
-        setKeyword('')
-        setSuggestions([])
-    }
-
-    useEffect(() => {
-        fetchDataForAutoComplete()
-    }, [])
+	useEffect(() => {
+		fetchDataForSuggestions();
+	}, []);
 
 	return (
 		<div>
 			<form className="form-inline justify-content-center" onSubmit={handleSubmit}>
-				<input type="text" name="keyword" placeholder="Search a keyword" className="form-control w-50" value={keyword}
-                onChange={handleChange}  
-                onBlur={() => {
-                    setTimeout(() => {
-                        setSuggestions([])
-                    }, 100)
-                }}/>
+				<input
+					type="text"
+					name="keyword"
+					placeholder="Search a keyword"
+					className="form-control w-50"
+					value={keyword}
+					onChange={handleChange}
+					onBlur={() => {
+						setTimeout(() => {
+							setMatchedSuggestions([]);
+						}, 300);
+					}}
+					{...disableInputWhileLoading()}
+				/>
 				<button className="btn btn-primary m-3">
 					<i className="fas fa-search"></i>
 				</button>
 			</form>
-            
-            {suggestions.length > 0 && suggestions.map((suggestion) => <div className="suggestion-display"><Suggestion suggestion={suggestion} setSuggestions={setSuggestions} setKeyword={setKeyword}/> </div>)}
-            
-            
+
+			{matchedSuggestions.length > 0 &&
+				matchedSuggestions.map((suggestion) => (
+					<div className="suggestion-display">
+						<Suggestion key={suggestion} matchedSuggestion={suggestion} setMatchedSuggestions={setMatchedSuggestions} setKeyword={setKeyword} />
+					</div>
+				))}
 		</div>
 	);
 };

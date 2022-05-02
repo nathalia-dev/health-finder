@@ -4,7 +4,8 @@ const Footer: React.FC = () => {
 
     return (
         <div>
-            <h1>Goodbye</h1>
+            <hr/>
+            <p> footer </p>
         </div>
     )
 }

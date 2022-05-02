@@ -1,22 +1,23 @@
 import React from 'react'
 
 interface SuggestionProps {
-    setSuggestions: React.Dispatch<any>
+    setMatchedSuggestions: React.Dispatch<any>
     setKeyword: React.Dispatch<any>
-    suggestion: string
+    matchedSuggestion: string
 
 }
 
-const Suggestion: React.FC <SuggestionProps> = ({suggestion, setSuggestions, setKeyword}) => {
-    
+const Suggestion: React.FC <SuggestionProps> = ({matchedSuggestion, setMatchedSuggestions, setKeyword}) => {
+
     const handleOnClick = (suggestion:string) => {
+        console.log("suggestion",suggestion)
         setKeyword(suggestion)
-        setSuggestions([])
+        setMatchedSuggestions([])
     }
 
     return (
-        <div className="suggestion" onClick={() => handleOnClick(suggestion)}>
-           {suggestion}
+        <div className="suggestion" onClick={() => handleOnClick(matchedSuggestion)}>
+           {matchedSuggestion}
         </div>
     )
 }

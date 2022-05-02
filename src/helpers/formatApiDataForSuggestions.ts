@@ -1,14 +1,15 @@
 import { RawTopic } from "../types"
 
-function formatApiDataForAutoComplete(data: RawTopic[]) : string[] {
+function formatApiDataForSuggestions(data: RawTopic[]) : string[] {
 
-    const result = []
-
-    const topicsItem = data.map((item) => item.Title)
-    for (let element of topicsItem) {
+    const result: string[] = []
+    //todo: improve
+    const topicsItem = data.forEach((item) => {
+        const element = item.Title
         const words = element.split(" ")
         result.push(...words)
-    }
+    })
+
     let unique = Array.from(new Set(result))
     //returning an array of strings with no special characters.
     return unique.map((string) => string.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''))
@@ -19,4 +20,4 @@ function formatApiDataForAutoComplete(data: RawTopic[]) : string[] {
 
 
 
-export default formatApiDataForAutoComplete
+export default formatApiDataForSuggestions
