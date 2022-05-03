@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Error from './Error';
 import Search from './search/Search';
 import HealthTopicsList from './health-topics/HealthTopicsList'
 import { HealthTopic } from "./types"
@@ -7,10 +8,15 @@ import './health-topics/healthTopic.css'
 const Home: React.FC = () => {
 
     const [healthTopics, setHealthTopics] = useState<HealthTopic[]>([])
-    //create an component to error?
-    const [error, setError] = useState<any>([])
+    const [error, setError] = useState<any>(null)
     const [isLoadingHealthTopics, setIsLoadingHealthTopics] = useState<Boolean>(false)
-    console.log(healthTopics)
+
+    if (error) {
+        return (
+            <Error />
+        )
+    }
+    
     return (
         <div>
             <Search setHealthTopics={setHealthTopics} setError={setError} setIsLoadingHealthTopics={setIsLoadingHealthTopics} />

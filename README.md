@@ -1,46 +1,28 @@
-# Getting Started with Create React App
+## Project Description
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+join-deliberate is a frontend project that access an external API and provide a search engine to find content about health. 
 
-## Available Scripts
+## Project Motivation
 
-In the project directory, you can run:
+This project is a code assessment to show knowleadge of React and code best practices. 
 
-### `npm start`
+## Project Funcionalities (how to call this item? user experience?)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The project is divided in two major aspects: search and healthTopics. The search care about the search engine. And healthTopics care about the results and how to display them.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+* the user can search for health content by typing a keyword using the search input. 
 
-### `npm test`
+* while the user is typing, the app will suggest some words to facilitate the typing process and also to give some guesses about what subjects can be found. The user has the option to use them or not. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* after performing the search, the results will be visible on the page with the following pattern: 
 
-### `npm run build`
+    - every result will be a specific card. This card will have a title, categories, related items and sections(articles).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    - the related items and sections(articles) are shown as buttons (to minimized or expand their contents) to improve the page's organization and visibility. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    - sections (articles) are the content itself. They are the text's linked to that specific Title and Categories. Inside of them, the user will find a subtitle and another button to minimized or expand the content. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    - related items are made by a title and a link. This link move the user to another page (out from the app) to access content that could be familiar with the subject they are searching.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 
