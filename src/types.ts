@@ -57,7 +57,8 @@ export interface RelatedItem {
 
 export interface Section {
     title: string
-    content: string 
+    content: string
+    id: string 
 }
 
 export interface HealthTopic {

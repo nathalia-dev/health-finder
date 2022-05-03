@@ -27,6 +27,7 @@ const Search: React.FC<SearchProps> = ({ setHealthTopics, setError, setIsLoading
 			setIsLoadingHealthTopics(true);
 			//vulnerabilidades.
 			const res = await axios.get(`${baseUrl}${endpointSearchHealthTopics}${searchQueryFormat(keyword)}`);
+
 			//checking the response status code.
 			if (res.status !== 200) {
 				setError([{ status: res.status, message: "Something went wrong, please try again later" }]);
@@ -38,6 +39,7 @@ const Search: React.FC<SearchProps> = ({ setHealthTopics, setError, setIsLoading
 				setHealthTopics([]);
 				setIsLoadingHealthTopics(false);
 			} else {
+				console.log(res)
 				const formatedData = formatApiData(res.data.Result.Resources.Resource);
 				setHealthTopics(formatedData);
 				setIsLoadingHealthTopics(false);
@@ -76,7 +78,7 @@ const Search: React.FC<SearchProps> = ({ setHealthTopics, setError, setIsLoading
 
 		if (value.length > 0) {
 			matches = allAvailableSuggestions.filter((topic) => {
-				const regex = new RegExp(`${value}`, "gi");
+				const regex = new RegExp(`${value.toLowerCase()}`, "gi");
 				return topic.match(regex);
 			});
 		}

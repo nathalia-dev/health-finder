@@ -38,7 +38,7 @@ const HealthTopicItem: React.FC<HealthTopic> = ({ id, title, categories, image, 
 			</div>
 			<div className="row p-2 bg-white mx-0 justify-content-center">
 				{expandRelItem && relatedItem.map((relItem) => <HealthTopicRelatedItem key={relItem.id} {...relItem} />)}
-				{expandSection && sections.map((secItem) => <HealthTopicSection {...secItem} />)}
+				{expandSection && sections.map((secItem) => <HealthTopicSection key={secItem.id} {...secItem} />)}
 			</div>
 		</div>
 	);

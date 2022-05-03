@@ -10,7 +10,7 @@ const Home: React.FC = () => {
     //create an component to error?
     const [error, setError] = useState<any>([])
     const [isLoadingHealthTopics, setIsLoadingHealthTopics] = useState<Boolean>(false)
-    
+    console.log(healthTopics)
     return (
         <div>
             <Search setHealthTopics={setHealthTopics} setError={setError} setIsLoadingHealthTopics={setIsLoadingHealthTopics} />
