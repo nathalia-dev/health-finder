@@ -67,11 +67,11 @@ The project is divided in two major aspects: search and healthTopics. The search
 
 - Autocomplete Search: 
 
-        - There is many ways to implement a autocomplete search. Also, there is good frameworks that helps too, as Material UI. But I've decided to do it by myself, as I wanted to learn more about it and understand its whole process. 
+    - There is many ways to implement a autocomplete search. Also, there is good frameworks that helps too, as Material UI. But I've decided to do it by myself, as I wanted to learn more about it and understand its whole process. 
 
-        - To created the autocomplete search **suggestions**: i've assumed that the search by keyword performed by myHealthFinderApi is guided by the words contained inside the Topics and Categories. Those can be retrieve by acessing the `itemlist.json` endpoint. So, i'm requesting data from this endpoint to create the suggestions. 
+    - To created the autocomplete search **suggestions**: i've assumed that the search by keyword performed by myHealthFinderApi is guided by the words contained inside the Topics and Categories. Those can be retrieve by acessing the `itemlist.json` endpoint. So, i'm requesting data from this endpoint to create the suggestions. 
 
-        - I've found two ways to implement the autocomplete search. The first one would be by performing multiple API's requests during the user's typing process; And the second one would be by fetching data in the app initial render. Both have cons and pros, but for this project i've decided for the second option, as myHealthFinderApi is very slow to respond and the amount of data that it retrieves is not big. So, from my understanding, the app performance is less compromised if we choose the second option for this app. 
+    - I've found two ways to implement the autocomplete search. The first one would be by performing multiple API's requests during the user's typing process; And the second one would be by fetching data in the app initial render. Both have cons and pros, but for this project i've decided for the second option, as myHealthFinderApi is very slow to respond and the amount of data that it retrieves is not big. So, from my understanding, the app performance is less compromised if we choose the second option for this app. 
 
 - Input Search: Based on the way I've decided to implement the autocomplete search and considering the time response of the external API, to avoid problems when the user types too fast, i've deactivated the inputSearch in the app initial render. It will be activated, once the fetch data to generate the suggestions is done. Again, is not the best user experience, but is better than problems when typing. 
 
