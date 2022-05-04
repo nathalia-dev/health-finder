@@ -1,18 +1,18 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-import Search from "../search/Search";
+import Search from "../Search";
 import axios, {AxiosResponse} from "axios";
-import { mockDataForSuggestions } from "../mockDataForTests"
+import { mockDataForSuggestions } from "../__fixtures__/mockDataForTests"
 
 jest.mock("axios");
 
 it("shows autocomplete suggestions when you change input (search) value", () => {
 	const setIsLoadingHealthTopics = jest.fn((value) => {});
 	const setHealthTopics = jest.fn((value) => {});
-	const setError = jest.fn((value) => {});
+	const setIsError = jest.fn((value) => {});
 
-	render(<Search setIsLoadingHealthTopics={setIsLoadingHealthTopics} setHealthTopics={setHealthTopics} setError={setError} />);
+	render(<Search setIsLoadingHealthTopics={setIsLoadingHealthTopics} setHealthTopics={setHealthTopics} setIsError={setIsError} />);
 
 	const searchInput: any = screen.queryByPlaceholderText("Search a keyword");
 
@@ -24,9 +24,9 @@ it("shows autocomplete suggestions when you change input (search) value", () => 
 it("should have the searchInput disabled when initialized", () => {
 	const setIsLoadingHealthTopics = jest.fn((value) => {});
 	const setHealthTopics = jest.fn((value) => {});
-	const setError = jest.fn((value) => {});
+	const setIsError = jest.fn((value) => {});
 
-	render(<Search setIsLoadingHealthTopics={setIsLoadingHealthTopics} setHealthTopics={setHealthTopics} setError={setError} />);
+	render(<Search setIsLoadingHealthTopics={setIsLoadingHealthTopics} setHealthTopics={setHealthTopics} setIsError={setIsError} />);
 
 	expect(screen.queryByPlaceholderText("Search a keyword")).toBeDisabled();
 });
@@ -34,7 +34,7 @@ it("should have the searchInput disabled when initialized", () => {
 it("should have the searchInput available after api call for suggestions finalize", async () => {
 	const setIsLoadingHealthTopics = jest.fn((value) => {});
 	const setHealthTopics = jest.fn((value) => {});
-	const setError = jest.fn((value) => {});
+	const setIsError = jest.fn((value) => {});
 	const baseUrl = "https://health.gov/myhealthfinder/api/v3/";
 	const endpointSearchSuggestions = "itemlist.json";
 
@@ -58,7 +58,7 @@ it("should have the searchInput available after api call for suggestions finaliz
 
 	axios.get.mockImplementation(mockApiCall);
 
-	await act(async () => render(<Search setIsLoadingHealthTopics={setIsLoadingHealthTopics} setHealthTopics={setHealthTopics} setError={setError} />));
+	await act(async () => render(<Search setIsLoadingHealthTopics={setIsLoadingHealthTopics} setHealthTopics={setHealthTopics} setIsError={setIsError} />));
 
 	expect(screen.queryByPlaceholderText("Search a keyword")).toHaveProperty('disabled', false)
 
@@ -67,7 +67,7 @@ it("should have the searchInput available after api call for suggestions finaliz
 it("should show autocomplete suggestions that matches with input value", async () => {
 	const setIsLoadingHealthTopics = jest.fn((value) => {});
 	const setHealthTopics = jest.fn((value) => {});
-	const setError = jest.fn((value) => {});
+	const setIsError = jest.fn((value) => {});
 	const baseUrl = "https://health.gov/myhealthfinder/api/v3/";
 	const endpointSearchSuggestions = "itemlist.json";
 
@@ -92,7 +92,7 @@ it("should show autocomplete suggestions that matches with input value", async (
 
 	axios.get.mockImplementation(mockApiCall);
 
-	await act(async () => render(<Search setIsLoadingHealthTopics={setIsLoadingHealthTopics} setHealthTopics={setHealthTopics} setError={setError} />));
+	await act(async () => render(<Search setIsLoadingHealthTopics={setIsLoadingHealthTopics} setHealthTopics={setHealthTopics} setIsError={setIsError} />));
 
 	const searchInput: any = screen.queryByPlaceholderText("Search a keyword");
 
@@ -104,4 +104,4 @@ it("should show autocomplete suggestions that matches with input value", async (
 	expect(screen.queryByText("keep")).toBeNull();
 });
 
-// export {}
+export {}

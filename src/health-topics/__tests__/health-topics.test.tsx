@@ -1,9 +1,9 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-import Home from "../Home"
+import Home from "../../home/Home"
 import axios, {AxiosResponse} from "axios";
-import { mockDataForHealthTopics } from "../mockDataForTests"
+import { mockDataForHealthTopics } from "../__fixtures__/mockDataForTests"
 
 
 jest.mock("axios");
@@ -47,25 +47,25 @@ it("should display the health topics content on page", async () => {
   const title1 = await screen.findByText("Get Your Child the HPV Vaccine")
   expect(title1).toBeInTheDocument()
 
-  const categories = await screen.findByText("Cervical Cancer, Shots (Vaccines)")
+  const categories = screen.getByText("Cervical Cancer, Shots (Vaccines)")
   expect(categories).toBeInTheDocument()
 
-  const relatedItemBtn = await screen.findAllByText("Related Items")
+  const relatedItemBtn = screen.getAllByText("Related Items")
   expect(relatedItemBtn[0]).toBeInTheDocument()
 
-  const articlesBtn = await screen.findAllByText("Sections(Articles)")
+  const articlesBtn = screen.getAllByText("Sections(Articles)")
   expect(articlesBtn[0]).toBeInTheDocument()
 
-  const title2 = await screen.findByText("Choosing a Doctor: Quick Tips")
+  const title2 = screen.getByText("Choosing a Doctor: Quick Tips")
   expect(title2).toBeInTheDocument()
 
   fireEvent.click(relatedItemBtn[0])
   fireEvent.click(articlesBtn[0])
   
-  const relItemTitle = await screen.findByText("Get Your Pre‑teen’s Shots on Schedule")
+  const relItemTitle = screen.getByText("Get Your Pre‑teen’s Shots on Schedule")
   expect(relItemTitle).toBeInTheDocument()
 
-  const SectionTitle = await screen.findByText("Take Action: See a Doctor")
+  const SectionTitle = screen.getByText("Take Action: See a Doctor")
   expect(SectionTitle).toBeInTheDocument()
     //clicar no + da section(articles) para ver content. Mas como pegar esse btn?
 

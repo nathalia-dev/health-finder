@@ -6,24 +6,7 @@ body {
   text-align: center;
 }
 
-.app-header{
-  background-color: #343a40;
-  padding: 150px 0 50px 0;
-}
 
-.app-footer {
 
-}
 
-.app-header h1 {
-  font-weight: 900;
-  font-size: 3rem;
-  color: rgb(247, 247, 247);
-  margin-bottom: 50px;
-}
 
-.loading img{
-  width: 100px;
-  margin: auto;
-
-}

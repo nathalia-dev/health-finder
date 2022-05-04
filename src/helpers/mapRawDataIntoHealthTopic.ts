@@ -1,7 +1,7 @@
 import { RawHealthTopic, RawRelatedItem, RawSectionItem,  HealthTopic, RelatedItem, Section  } from "../types"
 
 
-function formatApiData(res: RawHealthTopic[]) : HealthTopic[] {
+function mapRawDataIntoHealthTopic(res: RawHealthTopic[]) : HealthTopic[] {
     return res.map((item) => (
         {title: item.Title,
          id: item.Id, 
@@ -23,4 +23,4 @@ function formatSections(sections: RawSectionItem[]): Section[] {
     return sections.map((item) => ({title: item.Title, content: item.Content, id: uuidv4()}))
 }
 
-export default formatApiData
+export default mapRawDataIntoHealthTopic

@@ -1,54 +1,50 @@
 import axios from "axios";
-import { request } from "http";
-import formatApiData from "../helpers/formatApiData";
-import formatApiDataForSuggestions from "../helpers/formatApiDataForSuggestions";
+import mapRawDataIntoHealthTopic from "../helpers/mapRawDataIntoHealthTopic";
+import mapRawDataIntoAllAvailableSuggestions from "../helpers/mapRawDataIntoAllAvailableSuggestions";
 import searchQueryFormat from "../helpers/searchQueryFormat";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL || "https://health.gov/myhealthfinder/api/v3/";
+const BASE_URL = "https://health.gov/myhealthfinder/api/v3/";
 
 class myHealthFinderApi {
-	static async getHealthTopicsByKeyword(keyword:string) {
-		//to do: improve. Crio um objeto generico e geral de erro? ou deixo das mensagens?
-		//se deixar as mensagens ,o que retorno no catch(error) como status?
+	static async getHealthTopicsByKeyword(keyword: string) {
+
 		try {
 			const endpoint = "topicsearch.json?keyword=";
 			const res = await axios.get(`${BASE_URL}${endpoint}${searchQueryFormat(keyword)}`);
 
-			if (res.status !== 200) {
-				return [{ status: res.status, message: "Something went wrong, please try again later" }];
+			if (!res || res?.status !== 200) {
+				return { data: [],  isError: true };
 			}
 
 			if (res.data.Result.Total === 0) {
-				return [];
+				return { data: [],  isError: false };
 			}
-			const formatedData = formatApiData(res.data.Result.Resources.Resource);
+			const mapedData = mapRawDataIntoHealthTopic(res.data.Result.Resources.Resource);
 
-			return formatedData;
+			return { data: mapedData,  isError: false };
+
 		} catch (error: any) {
-			return [{ status: error.request.status, message: "Something went wrong, please try again later" }];
+			return { data: [],  isError: true };
 		}
 	}
 
-    //to do: improve. 
-    //1)Nome do method: fica o nome que api da ou coloco o nome do que estou pegando?
-    //2) posso retornar no catch(error) um empty array? nao quero bugar a aplicacao pq o autocomplete nao deu certo.
-    static async getItemList() {
-        try {
-            const endpoint = "itemlist.json";
-            const res = await axios.get(`${BASE_URL}${endpoint}`);
-            if (res.status !== 200) {
-				return [];
+	static async getAllAvailableSuggestions() {
+		try {
+			const endpoint = "itemlist.json";
+			const res = await axios.get(`${BASE_URL}${endpoint}`);
+			if (res.status !== 200) {
+				return { data: [],  isError: true };
 			}
 
 			if (res.data.Result.Total === 0) {
-				return [];
+				return { data: [],  isError: false };
 			}
-            const formatedData = formatApiDataForSuggestions(res.data.Result.Items.Item);
-            return formatedData
-        } catch (error) {
-            return []
-        }
-    }
+			const mapedData = mapRawDataIntoAllAvailableSuggestions(res.data.Result.Items.Item);
+			return { data: mapedData,  isError: false };
+		} catch (error) {
+			return { data: [],  isError: true };
+		}
+	}
 }
 
 export default myHealthFinderApi;

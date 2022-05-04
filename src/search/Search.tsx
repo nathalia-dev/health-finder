@@ -6,11 +6,11 @@ import "./search.css";
 
 interface SearchProps {
 	setHealthTopics: React.Dispatch<any>;
-	setError: React.Dispatch<any>;
+	setIsError: React.Dispatch<Boolean>;
 	setIsLoadingHealthTopics: React.Dispatch<Boolean>;
 }
 
-const Search: React.FC<SearchProps> = ({ setHealthTopics, setError, setIsLoadingHealthTopics }) => {
+const Search: React.FC<SearchProps> = ({ setHealthTopics, setIsError, setIsLoadingHealthTopics }) => {
 	const [keyword, setKeyword] = useState("");
 	const [matchedSuggestions, setMatchedSuggestions] = useState<string[]>([]);
 	const [allAvailableSuggestions, setAllAvailableSuggestions] = useState<string[]>([]);
@@ -20,12 +20,13 @@ const Search: React.FC<SearchProps> = ({ setHealthTopics, setError, setIsLoading
 		try {
 			setIsLoadingHealthTopics(true);
 			const res = await myHealthFinderApi.getHealthTopicsByKeyword(keyword)
-			//to do: improve.
-			// como averiguar se ta voltando um healthTopic[] ou um {status: , message:} para salvar no setError.
-			setHealthTopics(res);
+			if (res.isError) {
+				setIsError(true)
+			}
+			setHealthTopics(res.data);
 			setIsLoadingHealthTopics(false);
 		} catch (error) {
-			setError(error);
+			setIsError(true);
 			setIsLoadingHealthTopics(false);
 		}
 	};
@@ -34,8 +35,8 @@ const Search: React.FC<SearchProps> = ({ setHealthTopics, setError, setIsLoading
 	const fetchDataForSuggestions = async () => {
 		try {
 			setIsLoadingAllAvailableSuggestions(true);
-			const res = await myHealthFinderApi.getItemList()
-			setAllAvailableSuggestions(res)
+			const res = await myHealthFinderApi.getAllAvailableSuggestions()
+			setAllAvailableSuggestions(res.data)
 			setIsLoadingAllAvailableSuggestions(false)
 		} catch (e) {
 			setAllAvailableSuggestions([]);

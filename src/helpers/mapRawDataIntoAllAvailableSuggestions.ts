@@ -1,6 +1,6 @@
 import { RawTopic } from "../types"
 
-function formatApiDataForSuggestions(data: RawTopic[]) : string[] {
+function mapRawDataIntoAllAvailableSuggestions(data: RawTopic[]) : string[] {
 
     const result: string[] = []
     //todo: improve  (eliminar um caracter sozinho? )
@@ -22,4 +22,4 @@ function formatApiDataForSuggestions(data: RawTopic[]) : string[] {
 
 
 
-export default formatApiDataForSuggestions
+export default mapRawDataIntoAllAvailableSuggestions
