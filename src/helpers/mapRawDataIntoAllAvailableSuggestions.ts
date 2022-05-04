@@ -1,25 +1,14 @@
-import { RawTopic } from "../types"
+import { RawTopicAndCategories } from "../types"
 
-function mapRawDataIntoAllAvailableSuggestions(data: RawTopic[]) : string[] {
-
-    const result: string[] = []
-    //todo: improve  (eliminar um caracter sozinho? )
-    
-    const topicsItem = data.forEach((item) => {
-        //saving title with no special character and always lower case, to facilitate the process to eliminate duplicates.
-        const element = (item.Title).toLowerCase().replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '')
-        const words = element.split(" ")
-        result.push(...words)
-    })
-
-    //eliminating duplicates.
-    let unique = Array.from(new Set(result))
-
-    return unique
-
+function getWordsFromTitle(title: string): string[] {
+    const cleanTitle = title.toLowerCase().replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '')
+    return cleanTitle.split(" ")
 }
 
-
-
+function mapRawDataIntoAllAvailableSuggestions(data: RawTopicAndCategories[]) : string[] {
+    const wordsFromTitles = data.flatMap((item) => getWordsFromTitle(item.Title))
+    const uniqueWordsFromTitles = Array.from(new Set(wordsFromTitles))
+    return uniqueWordsFromTitles
+}
 
 export default mapRawDataIntoAllAvailableSuggestions

@@ -61,11 +61,11 @@ The project is divided in two major aspects: search and healthTopics. The search
 
 ## Assumptions and Technical Desicions
 
-- TypeScript: Althought I've asked and was allowed to write the code in JavaScript, as it is much more familiar and confortable to me, i've decided to use TypeScript. The daily routine of a software engineer is full of challanges and more important than to know the technologies itself(programming languages , frameworks, etc), is to know how to learn them (effectively and quickly) and be open to do it. 
+- **TypeScript**: Althought I've asked and was allowed to write the code in JavaScript, as it is much more familiar and confortable to me, i've decided to use TypeScript. The daily routine of a software engineer is full of challanges and more important than to know the technologies itself(programming languages , frameworks, etc), is to know how to learn them (effectively and quickly) and be open to do it. 
 
-- Landing Page: The app landing page starts blank, with no HealthTopics displayed, but only with the header, footer and search input. I know that this is not the best user experience, but myHealthFinderAPI is a little bit slow to responde. And I felt that render a initial content, making a get request would compromise the app's performance. 
+- **Landing Page**: The app landing page starts blank, with no HealthTopics displayed, but only with the header, footer and search input. I know that this is not the best user experience, but myHealthFinderAPI is a little bit slow to responde. And I felt that render a initial content, making a get request would compromise the app's performance. 
 
-- Autocomplete Search: 
+- **Autocomplete Searc**: 
 
     - There is many ways to implement a autocomplete search. Also, there is good frameworks that helps too, as Material UI. But I've decided to do it by myself, as I wanted to learn more about it and understand its whole process. 
 
@@ -73,15 +73,15 @@ The project is divided in two major aspects: search and healthTopics. The search
 
     - I've found two ways to implement the autocomplete search. The first one would be by performing multiple API's requests during the user's typing process; And the second one would be by fetching data in the app initial render. Both have cons and pros, but for this project i've decided for the second option, as myHealthFinderApi is very slow to respond and the amount of data that it retrieves is not big. So, from my understanding, the app performance is less compromised if we choose the second option for this app. 
 
-- Input Search: Based on the way I've decided to implement the autocomplete search and considering the time response of the external API, to avoid problems when the user types too fast, i've deactivated the inputSearch in the app initial render. It will be activated, once the fetch data to generate the suggestions is done. Again, is not the best user experience, but is better than problems when typing. 
+- **Input Search**: Based on the way I've decided to implement the autocomplete search and considering the time response of the external API, to avoid problems when the user types too fast, i've deactivated the inputSearch in the app initial render. It will be activated, once the fetch data to generate the suggestions is done. Again, is not the best user experience, but is better than problems when typing. 
 
-- Display healthTopic's card: some healthTopics could be very extensive. Based on that, I've chosen to implement expand/minimized buttons to Related Items and Sections. They all starts minimize and the user choose to open. 
+- **Display healthTopic's card**: some healthTopics could be very extensive. Based on that, I've chosen to implement expand/minimized buttons to Related Items and Sections. They all starts minimize and the user choose to open. 
 
-- Sections(articles) button name: I've decided to call this button as "Sections(articles)", because the assessment has the explicit requeriment to display "Sections" on the page, and I wanted to make clear that they are there. But, thinking about the User's perspective I thought would be more understable to called as "Articles". 
+- **Sections(articles) button name**: I've decided to call this button as "Sections(articles)", because the assessment has the explicit requeriment to display "Sections" on the page, and I wanted to make clear that they are there. But, thinking about the User's perspective I thought would be more understable to called as "Articles". 
 
-- Style: Althought it was not required, to let things easier to be seen I've applied some basic Bootstrap classes.
+- **Style**: Althought it was not required, to let things easier to be seen I've applied some basic Bootstrap classes.
 
-- Testing: all the core functionalities were tested. 
+- **Testing**: all the core functionalities were tested. 
 
 ## Improvements
 

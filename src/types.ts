@@ -1,5 +1,5 @@
 
-export interface RawTopic {
+export interface RawTopicAndCategories {
     Type: string
     Id: string
     Title: string
@@ -8,8 +8,8 @@ export interface RawTopic {
 }
 
 export interface RawSectionItem {
-    Title: string
-    Description?: string
+    Title: string | null
+    Description?: string | null
     Content: string
 }
 
@@ -24,15 +24,15 @@ export interface RawHealthTopic {
     Type: string
     Id: string
     Title: string
-    TransactionId: string
-    TransactioTitle?: string
+    TranslationId: string
+    TranslationTitle?: string
     Categories: string
     Populations?: string
-    MyHFTTitle?: string
+    MyHFTitle?: string
     MyHFDescription?: string
     MyHFCategory?: string
     MyHFCategoryHeading?: string
-    Lastupdate: string
+    LastUpdate: string
     ImageUrl: string
     ImageAlt: string
     AccessibleVersion: string
@@ -56,7 +56,7 @@ export interface RelatedItem {
 }
 
 export interface Section {
-    title: string
+    title: string | null
     content: string
     id: string 
 }

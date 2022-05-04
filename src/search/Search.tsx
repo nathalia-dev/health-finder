@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Suggestion from "./Suggestion";
-import myHealthFinderApi from "../api/myHealthFinderApi";
+import {getHealthTopicsByKeyword, getAllAvailableSuggestions} from "../api/myHealthFinderApi";
 import "./search.css";
 
 
@@ -19,7 +19,7 @@ const Search: React.FC<SearchProps> = ({ setHealthTopics, setIsError, setIsLoadi
 	const fetchDataForHealthTopics = async () => {
 		try {
 			setIsLoadingHealthTopics(true);
-			const res = await myHealthFinderApi.getHealthTopicsByKeyword(keyword)
+			const res = await getHealthTopicsByKeyword(keyword)
 			if (res.isError) {
 				setIsError(true)
 			}
@@ -35,7 +35,7 @@ const Search: React.FC<SearchProps> = ({ setHealthTopics, setIsError, setIsLoadi
 	const fetchDataForSuggestions = async () => {
 		try {
 			setIsLoadingAllAvailableSuggestions(true);
-			const res = await myHealthFinderApi.getAllAvailableSuggestions()
+			const res = await getAllAvailableSuggestions()
 			setAllAvailableSuggestions(res.data)
 			setIsLoadingAllAvailableSuggestions(false)
 		} catch (e) {
