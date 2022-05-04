@@ -47,8 +47,8 @@ The project is divided in two major aspects: search and healthTopics. The search
 - after performing the search, the results will be visible on the page with the following pattern: 
 
     
-    <img width="1455" alt="Captura de Tela 2022-05-04 às 12 12 06 AM" src="https://user-images.githubusercontent.com/62966004/166622449-af151ea1-c91a-445f-b71f-0d89be967fb5.png">
-
+    <img width="1560" alt="Captura de Tela 2022-05-04 às 6 12 42 PM" src="https://user-images.githubusercontent.com/62966004/166834209-76ee1a3e-b219-4de9-9058-f21ffa53d314.png">
+    
 
     - every result will be a specific card. This card will have a title, categories, related items and sections(articles).
 

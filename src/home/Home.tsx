@@ -18,10 +18,11 @@ const Home: React.FC = () => {
     }
     
     return (
-        <div>
+        <div className="content-wrap">
             <Search setHealthTopics={setHealthTopics} setIsError={setIsError} setIsLoadingHealthTopics={setIsLoadingHealthTopics} />
             {isLoadingHealthTopics && <div className="loading my-3"><img src="https://tenor.com/view/loading-waiting-buffering-gif-15460501.gif" alt="isLoadingGif" style={{backgroundColor: "grey"}}></img></div>}
-            {healthTopics.length > 0? <HealthTopicsList healthTopics={healthTopics}/> : null}
+            {healthTopics.length > 0? <HealthTopicsList healthTopics={healthTopics}/> : <p className="lead"> Please, initiate your search or try different keywords.</p>}
+
         </div>
     )
 }

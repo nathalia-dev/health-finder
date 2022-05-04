@@ -28,7 +28,7 @@ const HealthTopicItem: React.FC<HealthTopic> = ({ id, title, categories, image, 
 			</div>
 			<div className="align-items-center align-content-center col-md-3 border-left mt-1">
 				<div className="d-flex flex-column mt-4">
-					<button className="btn btn-primary btn-sm" type="button" onClick={handleOnClickRelItem}>
+					<button className="btn btn-outline-primary btn-sm" type="button" onClick={handleOnClickRelItem}>
 						{expandRelItem ? <i className="fas fa-minus"></i> : <i className="fas fa-plus"></i>} Related Items
 					</button>
 					<button className="btn btn-outline-primary btn-sm mt-2" onClick={handleOnClickSection} type="button">

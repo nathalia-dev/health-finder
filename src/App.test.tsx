@@ -7,8 +7,8 @@ test("it renders app with head, home and footer component, with no api responses
 	render(<App />);
 
 	const searchElement = screen.getByText("SEARCH");
-	const homeElement = screen.getByText("WELCOME");
-	const footerElement = screen.getByText("footer");
+	const homeElement = screen.getByText("Welcome to Health Finder");
+	const footerElement = screen.getByText("https://www.kickresume.com/cv/nathalia-dev/");
 
 	expect(searchElement).toBeInTheDocument();
 	expect(homeElement).toBeInTheDocument();

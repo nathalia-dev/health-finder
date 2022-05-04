@@ -6,7 +6,7 @@ describe("#mapRawDataIntoHealthTopic", function () {
       expect(Array.isArray(mapRawDataIntoHealthTopic(mockDataForHealthTopics))).toEqual(true)
     });
 
-    it("returns the array of objects with: id, title, categories, image (an object with imageUrland, imageAlt), relatedItem (an object with id, title and url), sections(an object with id, title and content)", function () {
+    it("returns an array of objects with: id, title, categories, image (an object with imageUrland, imageAlt), relatedItem (an object with id, title and url), sections(an object with id, title and content)", function () {
         
         jest.mock('uuid', () => ({ v4: () => '00000000-0000-0000-0000-000000000000' }));
 
