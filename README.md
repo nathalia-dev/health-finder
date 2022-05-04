@@ -48,7 +48,7 @@ The project is divided in two major aspects: search and healthTopics. The search
 
     
     <img width="1560" alt="Captura de Tela 2022-05-04 às 6 12 42 PM" src="https://user-images.githubusercontent.com/62966004/166834209-76ee1a3e-b219-4de9-9058-f21ffa53d314.png">
-    
+
 
     - every result will be a specific card. This card will have a title, categories, related items and sections(articles).
 
@@ -85,8 +85,11 @@ The project is divided in two major aspects: search and healthTopics. The search
 
 ## Improvements
 
-- Create Hooks for fetching data.
-- End-to-End test with Cypress
-- Continuous Integration: create a pipeline using CircleCI. 
+- Create Hooks for fetching data;
+- End-to-End test with Cypress;
+- Continuous Integration: create a pipeline using CircleCI;
+- Enable down and up arrows (keyboard) to select suggestions;
+- Highlight the keyword on the page after the results.
+- Refactor Search component ,creating a specific AutoComplete component that can be reusable. 
 
 
