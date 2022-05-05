@@ -1,4 +1,4 @@
-##JOIN DELIBERATE
+# Join Deliberate:
 
 ## Deploy:
 
