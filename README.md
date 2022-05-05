@@ -71,7 +71,7 @@ The project is divided in two major aspects: search and healthTopics. The search
 
 - **Landing Page**: The app landing page starts blank, with no HealthTopics displayed, but only with the header, footer and search input. I know that this is not the best user experience, but myHealthFinderAPI is a little bit slow to respond. And I felt that render a initial content, making a get request would compromise the app's performance. 
 
-- **Autocomplete Searc**: 
+- **Autocomplete Search**: 
 
     - There is many ways to implement an autocomplete search. Also, there is good frameworks that helps too, as Material UI. But I've decided to do it by myself, as I wanted to learn more about it and understand its whole process. 
 
@@ -98,6 +98,7 @@ The project is divided in two major aspects: search and healthTopics. The search
 - Highlight the keyword on the page after the results;
 - Refactor Search component ,creating a specific AutoComplete component that can be reusable;
 - Resolve two warnings about the "act + render" keywords in some test files;
-- Implement autocomplete search with multiples words together, forming a phrase
+- Implement autocomplete search with multiples words together, forming a phrase;
+- Better organizing dependencies;
 
 
