@@ -1,3 +1,9 @@
+#JOIN DELIBERATE
+
+## Deploy:
+
+to see this project deployed, please click [here](https://health-finder-project.herokuapp.com/)
+
 ## Project Description
 
 join-deliberate is a frontend project that access an external API, provide a search engine to find content about health and display all the results on the page.
@@ -90,7 +96,8 @@ The project is divided in two major aspects: search and healthTopics. The search
 - Continuous Integration: create a pipeline using CircleCI;
 - Enable down and up arrows (keyboard) to select suggestions;
 - Highlight the keyword on the page after the results;
-- Refactor Search component ,creating a specific AutoComplete component that can be reusable. 
-- Resolve two warnings about the "act + render" keywords in some test files.
+- Refactor Search component ,creating a specific AutoComplete component that can be reusable;
+- Resolve two warnings about the "act + render" keywords in some test files;
+- Implement autocomplete search with multiples words together, forming a phrase
 
 
