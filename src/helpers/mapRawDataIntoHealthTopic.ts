@@ -1,7 +1,7 @@
 import { RawHealthTopic, RawRelatedItem, RawSectionItem,  HealthTopic, RelatedItem, Section  } from "../types"
 
 
-function mapRawDataIntoHealthTopic(res: RawHealthTopic[]) : HealthTopic[] {
+const mapRawDataIntoHealthTopic = (res: RawHealthTopic[]) : HealthTopic[] => {
     return res.map((item) => (
         {title: item.Title,
          id: item.Id, 
@@ -13,12 +13,11 @@ function mapRawDataIntoHealthTopic(res: RawHealthTopic[]) : HealthTopic[] {
 
 }
 
-function formatRelatedItens(relItens: RawRelatedItem[]): RelatedItem[] {
+const formatRelatedItens = (relItens: RawRelatedItem[]): RelatedItem[] => {
     return relItens.map((item) => ({title: item.Title, url: item.Url, id: item.Id}))
 }
 
-//to improve: se nao tiver title salvar com algo do tipo "no title"?
-function formatSections(sections: RawSectionItem[]): Section[] {
+const formatSections = (sections: RawSectionItem[]): Section[] => {
     const { v4: uuidv4 } = require('uuid');
     return sections.map((item) => ({title: item.Title, content: item.Content, id: uuidv4()}))
 }

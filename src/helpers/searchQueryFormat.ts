@@ -1,13 +1,9 @@
+const searchQueryFormat = (string: string): string => {
+	const cleanWhiteSpaceFromString = string.replace(/\s+/g, " ").trim();
 
-function searchQueryFormat(string: string): string {
+	const query = cleanWhiteSpaceFromString.replace(/\s/g, "%20");
 
-    //cleaning eventually double (or more) white's space.
-    let s = string.replace(/\s+/g, ' ').trim()
+	return query;
+};
 
-    //replacing the white spaces for %20.
-    let query = s.replace(/\s/g, "%20")
-
-    return query
-}
-
-export default searchQueryFormat
+export default searchQueryFormat;

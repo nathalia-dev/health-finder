@@ -23,16 +23,19 @@ const HealthTopicItem: React.FC<HealthTopic> = ({ id, title, categories, image, 
 			<div className="col-md-6 mt-1">
 				<h5>{title}</h5>
 				<div className="d-flex flex-row">
-					<div className="mt-2 mb-1 spec-1 "> <span className="badge badge-success">Categories:</span> {categories}</div>
+					<div className="mt-2 mb-1 spec-1 ">
+						{" "}
+						<span className="badge badge-success">Categories:</span> {categories}
+					</div>
 				</div>
 			</div>
 			<div className="align-items-center align-content-center col-md-3 border-left mt-1">
 				<div className="d-flex flex-column mt-4">
-					<button className="btn btn-outline-primary btn-sm" type="button" onClick={handleOnClickRelItem}>
-						{expandRelItem ? <i className="fas fa-minus"></i> : <i className="fas fa-plus"></i>} Related Items
+					<button className="btn btn-outline-primary btn-sm" onClick={handleOnClickRelItem}>
+						{expandRelItem ? <i className="fas fa-minus"></i> : <i className="fas fa-plus"></i>}Related Items
 					</button>
-					<button className="btn btn-outline-primary btn-sm mt-2" onClick={handleOnClickSection} type="button">
-						{expandSection ? <i className="fas fa-minus"></i> : <i className="fas fa-plus"></i>} Sections(Articles)
+					<button className="btn btn-outline-primary btn-sm mt-2" onClick={handleOnClickSection}>
+						{expandSection ? <i className="fas fa-minus"></i> : <i className="fas fa-plus"></i>}Sections(Articles)
 					</button>
 				</div>
 			</div>

@@ -1,7 +1,7 @@
 import React from "react";
 import HealthTopicsItem from "./HealthTopicItem";
 import { HealthTopic } from "../types";
-import "./healthTopic.css"
+import "./healthTopic.css";
 
 interface HealthTopicsListProps {
 	healthTopics: HealthTopic[];

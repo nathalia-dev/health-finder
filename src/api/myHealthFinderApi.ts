@@ -14,12 +14,12 @@ export const getHealthTopicsByKeyword = async (keyword: string) => {
 			return { data: [], isError: true };
 		}
 
-		if (res.data?.Result?.Total === 0) {
+		if (res.data?.Result?.Total === 0 || !res.data.Result.Resources?.Resource) {
 			return { data: [], isError: false };
 		}
-		const mapedData = mapRawDataIntoHealthTopic(res.data.Result.Resources.Resource);
 
-		return { data: mapedData, isError: false };
+		const mappedData = mapRawDataIntoHealthTopic(res.data.Result.Resources.Resource);
+		return { data: mappedData, isError: false };
 	} catch (error: any) {
 		return { data: [], isError: true };
 	}
@@ -33,11 +33,12 @@ export const getAllAvailableSuggestions = async () => {
 			return { data: [], isError: true };
 		}
 
-		if (res.data?.Result?.Total === 0) {
+		if (res.data?.Result?.Total === 0 || !res.data.Result.Items?.Item) {
 			return { data: [], isError: false };
 		}
-		const mapedData = mapRawDataIntoAllAvailableSuggestions(res.data.Result.Items.Item);
-		return { data: mapedData, isError: false };
+
+		const mappedData = mapRawDataIntoAllAvailableSuggestions(res.data.Result.Items.Item);
+		return { data: mappedData, isError: false };
 	} catch (error) {
 		return { data: [], isError: true };
 	}

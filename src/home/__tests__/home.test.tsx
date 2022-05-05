@@ -1,6 +1,5 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { act } from "react-dom/test-utils";
 import Home from "../../home/Home";
 import axios, { AxiosResponse } from "axios";
 import { mockDataForHealthTopics } from "../__fixtures__/mockDataForTests";
@@ -8,9 +7,9 @@ import { mockDataForHealthTopics } from "../__fixtures__/mockDataForTests";
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-describe("testing core functionalities of Home component", function () {
+describe("<Home />", () => {
 
-	it("should display the searchInput and only a simples phrase , if there is no healthTopics yet and the IsLoading is false", function  () {
+	it("should display the searchInput and only a simples phrase , if there is no healthTopics yet and the IsLoading is false", () =>  {
 		render(<Home />);
 
 		expect(screen.getByText("SEARCH")).toBeInTheDocument();

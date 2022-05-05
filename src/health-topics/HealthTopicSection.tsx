@@ -11,10 +11,11 @@ const HealthTopicSection: React.FC<Section> = ({ title, content }) => {
 
 	return (
 		<div className="col-sm-8 mt-3">
-			<p className="font-weight-bold">{title ? title : "empty title"}
-			<button className="btn btn-outline-info badge mx-3" onClick={handleOnClickContent}>
-				{expandContent ? <i className="fas fa-minus"></i> : <i className="fas fa-plus"></i>}
-			</button>
+			<p className="font-weight-bold">
+				{title ? title : "empty title"}
+				<button className="btn btn-outline-info badge mx-3" onClick={handleOnClickContent}>
+					{expandContent ? <i className="fas fa-minus"></i> : <i className="fas fa-plus"></i>}
+				</button>
 			</p>
 			{expandContent && <div className="mt-3">{parse(content)}</div>}
 		</div>

@@ -1,14 +1,9 @@
 body {
-  background: #eee
+	background: #eee;
 }
 
 .App {
-  text-align: center;
-  position: relative;
-  min-height: 100vh;
+	text-align: center;
+	position: relative;
+	min-height: 100vh;
 }
-
-
-
-
-

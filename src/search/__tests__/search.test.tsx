@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-unnecessary-act */
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
@@ -8,7 +9,7 @@ import { mockDataForSuggestions } from "../__fixtures__/mockDataForTests";
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-describe("testing the inputSearch inside the Search Component", function () {
+describe("<Search />", () => {
 	const setIsLoadingHealthTopics = jest.fn((value) => {});
 	const setHealthTopics = jest.fn((value) => {});
 	const setIsError = jest.fn((value) => {});
@@ -42,13 +43,12 @@ describe("testing the inputSearch inside the Search Component", function () {
 
 		mockedAxios.get.mockImplementation(mockApiCall);
 
+		// @ts-ignore
 		await act(async () => render(<Search setIsLoadingHealthTopics={setIsLoadingHealthTopics} setHealthTopics={setHealthTopics} setIsError={setIsError} />));
 
 		expect(screen.queryByPlaceholderText("Search")).toHaveProperty("disabled", false);
 	});
-});
 
-describe("testing the autocomplete search feature inside the Search Component", function () {
 	it("should show autocomplete suggestions when you change input (search) value", async () => {
 		const setIsLoadingHealthTopics = jest.fn((value) => {});
 		const setHealthTopics = jest.fn((value) => {});
@@ -77,6 +77,7 @@ describe("testing the autocomplete search feature inside the Search Component", 
 
 		mockedAxios.get.mockImplementation(mockApiCall);
 
+		// @ts-ignore
 		await act(async () => render(<Search setIsLoadingHealthTopics={setIsLoadingHealthTopics} setHealthTopics={setHealthTopics} setIsError={setIsError} />));
 
 		const searchInput: any = screen.queryByTestId("inputSearch");
@@ -115,6 +116,7 @@ describe("testing the autocomplete search feature inside the Search Component", 
 
 		mockedAxios.get.mockImplementation(mockApiCall);
 
+		// @ts-ignore
 		await act(async () => render(<Search setIsLoadingHealthTopics={setIsLoadingHealthTopics} setHealthTopics={setHealthTopics} setIsError={setIsError} />));
 
 		const searchInput: any = screen.queryByPlaceholderText("Search");
@@ -154,6 +156,7 @@ describe("testing the autocomplete search feature inside the Search Component", 
 
 		mockedAxios.get.mockImplementation(mockApiCall);
 
+		// @ts-ignore
 		await act(async () => render(<Search setIsLoadingHealthTopics={setIsLoadingHealthTopics} setHealthTopics={setHealthTopics} setIsError={setIsError} />));
 
 		const searchInput: any = screen.queryByPlaceholderText("Search");

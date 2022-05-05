@@ -40,7 +40,7 @@ This project is a code assessment to show knowleadge of React and code best prac
 
 The project is divided in two major aspects: search and healthTopics. The search cares about the search engine. And healthTopics cares about the results and how to display them.
 
-- the user can search for health content by typing a keyword using the search input. 
+- the user can search for health content by typing keywords using the search input. 
 
 - while the user is typing, the app will suggest some words to facilitate the typing process and also to give some guesses about what subjects can be found. The user has the option to use those words or not. 
 
@@ -54,20 +54,20 @@ The project is divided in two major aspects: search and healthTopics. The search
 
     - the related items and sections(articles) are show as buttons (to minimized or expand their contents) to improve the page's organization and visibility. 
 
-    - sections (articles) are the content itself. They are the text's linked to that specific Title and Categories. Clickin on sections(articles) button, the user will find a subtitle and another button to minimized or expand the content. 
+    - sections (articles) are the content itself. They are the text's linked to that specific Title and Categories. When clicking on sections(articles) button, the user will find a subtitle and another button to minimized or expand the content. 
 
-    - related items are made by a title and a link. This link move the user to another page (provided by the external api, out from the app) to access content that could be familiar with the subject they are searching.
+    - related items are made by a title and a link. This link move the user to another page (provided by the external API, out from the app) to access content that could be familiar with the subject they are searching.
 
 
 ## Assumptions and Technical Desicions
 
 - **TypeScript**: Althought I've asked and was allowed to write the code in JavaScript, as it is much more familiar and confortable to me, i've decided to use TypeScript. The daily routine of a software engineer is full of challanges and more important than to know the technologies itself(programming languages , frameworks, etc), is to know how to learn them (effectively and quickly) and be open to do it. 
 
-- **Landing Page**: The app landing page starts blank, with no HealthTopics displayed, but only with the header, footer and search input. I know that this is not the best user experience, but myHealthFinderAPI is a little bit slow to responde. And I felt that render a initial content, making a get request would compromise the app's performance. 
+- **Landing Page**: The app landing page starts blank, with no HealthTopics displayed, but only with the header, footer and search input. I know that this is not the best user experience, but myHealthFinderAPI is a little bit slow to respond. And I felt that render a initial content, making a get request would compromise the app's performance. 
 
 - **Autocomplete Searc**: 
 
-    - There is many ways to implement a autocomplete search. Also, there is good frameworks that helps too, as Material UI. But I've decided to do it by myself, as I wanted to learn more about it and understand its whole process. 
+    - There is many ways to implement an autocomplete search. Also, there is good frameworks that helps too, as Material UI. But I've decided to do it by myself, as I wanted to learn more about it and understand its whole process. 
 
     - To created the autocomplete search **suggestions**: i've assumed that the search by keyword performed by myHealthFinderApi is guided by the words contained inside the Topics and Categories. Those can be retrieve by acessing the `itemlist.json` endpoint. So, i'm requesting data from this endpoint to create the suggestions. 
 
@@ -77,11 +77,11 @@ The project is divided in two major aspects: search and healthTopics. The search
 
 - **Display healthTopic's card**: some healthTopics could be very extensive. Based on that, I've chosen to implement expand/minimized buttons to Related Items and Sections. They all starts minimize and the user choose to open. 
 
-- **Sections(articles) button name**: I've decided to call this button as "Sections(articles)", because the assessment has the explicit requeriment to display "Sections" on the page, and I wanted to make clear that they are there. But, thinking about the User's perspective I thought would be more understable to called as "Articles". 
+- **Sections(articles) button name**: I've decided to call this button as "Sections(articles)", because the assessment has the explicit requeriment to display "Sections" on the page, and I wanted to make clear that they are there. But, thinking about the user's perspective, I thought would be more understandable to called it as "Articles". 
 
 - **Style**: Althought it was not required, to let things easier to be seen I've applied some basic Bootstrap classes.
 
-- **Testing**: all the core functionalities were tested. 
+- **Testing**: All the core functionalities were tested. 
 
 ## Improvements
 
@@ -89,7 +89,8 @@ The project is divided in two major aspects: search and healthTopics. The search
 - End-to-End test with Cypress;
 - Continuous Integration: create a pipeline using CircleCI;
 - Enable down and up arrows (keyboard) to select suggestions;
-- Highlight the keyword on the page after the results.
+- Highlight the keyword on the page after the results;
 - Refactor Search component ,creating a specific AutoComplete component that can be reusable. 
+- Resolve two warnings about the "act + render" keywords in some test files.
 
 
