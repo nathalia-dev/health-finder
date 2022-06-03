@@ -1,23 +1,27 @@
-# Join Deliberate:
+# Health Finder:
 
 ## Deploy:
 
 to see this project deployed, please click [here](https://health-finder-project.herokuapp.com/)
 
+#### note about heroku: 
+
+sometimes heroku can be very slow to load the page. If the autocomplete search does not work, please just reload the page. 
+
 ## Project Description
 
-join-deliberate is a frontend project that access an external API, provide a search engine to find content about health and display all the results on the page.
+join-deliberate is a frontend project that access an external API, provides a search engine to find content about health and displays all the results on the page.
 
 
 ## Project Motivation
 
-This project is a code assessment to show knowleadge of React and code best practices. 
+This project is a code assessment to show knowleadge of React, TypeScript and code best practices. 
 
 ## Tech Specs
 
 - React 
 - TypeScript
-- Boostrap
+- Bootstrap
 
 ### Important libraries and frameworks:
 
@@ -34,7 +38,7 @@ This project is a code assessment to show knowleadge of React and code best prac
 - from the folder you want to clone this repository, in your terminal, execute `git clone`.
 - enter in the project's root folder and execute `npm install`, to get all the project's dependecies. 
 - to initiate the project, also from the root folder, run in your terminal the command `npm start`
-- the URL will be http://localhost:5000/
+- the URL will be http://localhost:3000/
 
 ### Test Usage
 
@@ -65,27 +69,25 @@ The project is divided in two major aspects: search and healthTopics. The search
     - related items are made by a title and a link. This link move the user to another page (provided by the external API, out from the app) to access content that could be familiar with the subject they are searching.
 
 
-## Assumptions and Technical Desicions
+## Assumptions and Technical Decisions
 
-- **TypeScript**: Althought I've asked and was allowed to write the code in JavaScript, as it is much more familiar and confortable to me, i've decided to use TypeScript. The daily routine of a software engineer is full of challanges and more important than to know the technologies itself(programming languages , frameworks, etc), is to know how to learn them (effectively and quickly) and be open to do it. 
-
-- **Landing Page**: The app landing page starts blank, with no HealthTopics displayed, but only with the header, footer and search input. I know that this is not the best user experience, but myHealthFinderAPI is a little bit slow to respond. And I felt that render a initial content, making a get request would compromise the app's performance. 
+- **Landing Page**: The app landing page starts blank, with no HealthTopics displayed, but only with the header, footer and search input. I know that this is not the best user experience, but myHealthFinderAPI is a little bit slow to respond. And I felt that render a initial content, performing a get request, would compromise the app's performance. 
 
 - **Autocomplete Search**: 
 
-    - There is many ways to implement an autocomplete search. Also, there is good frameworks that helps too, as Material UI. But I've decided to do it by myself, as I wanted to learn more about it and understand its whole process. 
+    - There are many ways to implement an autocomplete search. Also, there are good frameworks that helps too, as Material UI. But I've decided to do it by myself, as I wanted to learn more about it and understand its whole process. 
 
     - To created the autocomplete search **suggestions**: i've assumed that the search by keyword performed by myHealthFinderApi is guided by the words contained inside the Topics and Categories. Those can be retrieve by acessing the `itemlist.json` endpoint. So, i'm requesting data from this endpoint to create the suggestions. 
 
-    - I've found two ways to implement the autocomplete search. The first one would be by performing multiple API's requests during the user's typing process; And the second one would be by fetching data in the app initial render. Both have cons and pros, but for this project i've decided for the second option, as myHealthFinderApi is very slow to respond and the amount of data that it retrieves is not big. So, from my understanding, the app performance is less compromised if we choose the second option for this app. 
+    - I've found two ways to implement the autocomplete search. The first one would be by performing multiple API's requests during the user's typing process; And the second one would be by fetching data in the app's initial render. Both have cons and pros, but for this project I've decided for the second option, as myHealthFinderApi is very slow to respond and the amount of data that it retrieves is not big. So, from my understanding, the app performance is less compromised if we choose the second option. 
 
 - **Input Search**: Based on the way I've decided to implement the autocomplete search and considering the time response of the external API, to avoid problems when the user types too fast, i've deactivated the inputSearch in the app initial render. It will be activated, once the fetch data to generate the suggestions is done. Again, is not the best user experience, but is better than problems when typing. 
 
 - **Display healthTopic's card**: some healthTopics could be very extensive. Based on that, I've chosen to implement expand/minimized buttons to Related Items and Sections. They all starts minimize and the user choose to open. 
 
-- **Sections(articles) button name**: I've decided to call this button as "Sections(articles)", because the assessment has the explicit requeriment to display "Sections" on the page, and I wanted to make clear that they are there. But, thinking about the user's perspective, I thought would be more understandable to called it as "Articles". 
+- **Sections(articles)** button name: I've decided to call this button as "Sections(articles)", because the API calls that data as "Sections" and I wanted to make clear what is being shown. But, thinking about the user's perspective, I think would be more understandable to called it as "Articles".
 
-- **Style**: Althought it was not required, to let things easier to be seen I've applied some basic Bootstrap classes.
+- **Style**: I did some basic Bootstrap classes to facilitate the app usage.
 
 - **Testing**: All the core functionalities were tested. 
 
@@ -96,7 +98,7 @@ The project is divided in two major aspects: search and healthTopics. The search
 - Continuous Integration: create a pipeline using CircleCI;
 - Enable down and up arrows (keyboard) to select suggestions;
 - Highlight the keyword on the page after the results;
-- Refactor Search component ,creating a specific AutoComplete component that can be reusable;
+- Refactor *Search component* ,creating a specific AutoComplete component that can be reusable;
 - Resolve two warnings about the "act + render" keywords in some test files;
 - Implement autocomplete search with multiples words together, forming a phrase;
 - Better organizing dependencies;
