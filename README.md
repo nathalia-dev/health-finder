@@ -10,7 +10,7 @@ sometimes heroku can be very slow to load the page. If the autocomplete search d
 
 ## Project Description
 
-join-deliberate is a frontend project that access an external API, provides a search engine to find content about health and displays all the results on the page.
+Health Finder is a frontend project that access an external API, provides a search engine to find content about health and displays all the results on the page.
 
 
 ## Project Motivation
